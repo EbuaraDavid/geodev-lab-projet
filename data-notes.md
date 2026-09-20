@@ -126,3 +126,10 @@
   - name (text)
 - NULLs: Yes; many optional OSM attributes contain NULL values
 - Coverage: Covers the study area; no obvious spatial gaps were identified on the map
+
+## CRS and preparation
+- All source layers arrived in EPSG:4326
+- Study area: Abuja Municipal Area Council (AMAC), extracted from GRID3 boundary data
+- Layers were clipped to the study area, then reprojected to EPSG:32632 (UTM Zone 32N)
+- Area check: AMAC = 1,446.57 km², calculated from the projected geometry
+- Working files are stored in data/processed/, while raw files remain untouched
