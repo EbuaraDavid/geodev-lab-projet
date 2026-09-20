@@ -128,8 +128,14 @@
 - Coverage: Covers the study area; no obvious spatial gaps were identified on the map
 
 ## CRS and preparation
-- All source layers arrived in EPSG:4326
-- Study area: Abuja Municipal Area Council (AMAC), extracted from GRID3 boundary data
-- Layers were clipped to the study area, then reprojected to EPSG:32632 (UTM Zone 32N)
-- Area check: AMAC = 1,446.57 km², calculated from the projected geometry
-- Working files are stored in data/processed/, while raw files remain untouched
+
+- Source CRS: All source layers were initially in EPSG:4326 (WGS 84).
+- Working CRS: EPSG:32632 (WGS 84 / UTM Zone 32N), chosen because AMAC is within UTM Zone 32N and the projected CRS uses metres, which is suitable for distance and area calculations.
+- Study area: Abuja Municipal Area Council (AMAC), obtained from GRID3.
+- Clipping: OSM rivers, streams and roads were clipped to the AMAC study-area boundary.
+- Reprojection: All clipped layers were reprojected to EPSG:32632 (PCS) for analysis.
+- Area check: The projected AMAC geometry gives an area of approximately 1,446.57 km². The area calculated from the original geographic coordinates was 0.119 and was therefore flagged as an incorrect area calculation caused by using a geographic CRS.
+- Quality checks: Feature counts, attribute fields, NULL values, geometry types and spatial coverage were checked for the source and clipped layers.
+- Problems found: NULL values were present in several optional OSM attributes. These were retained because they represent missing/unused OSM attributes rather than invalid geometry. The area calculation issue was resolved by calculating area using the projected layer.
+- Data preparation: Raw source data were kept unchanged, while clipped and reprojected layers were prepared for analysis.
+- Analysis-ready data: The clipped and reprojected layers will be stored together in an analysis-ready GeoPackage in data/processed/.
